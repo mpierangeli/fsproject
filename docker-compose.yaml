@@ -19,7 +19,7 @@ services:
     image: mysql
     container_name: db
     volumes:
-      - ./data:/var/lib/mysqlg
+      - ./data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: test
