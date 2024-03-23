@@ -1,4 +1,7 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 import crud
 from database import engine, localSession
@@ -8,6 +11,8 @@ from models import Base
 Base.metadata.create_all(bind=engine) # Create the tables in the database if not exist
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 def get_db():
     db = localSession()
@@ -16,11 +21,14 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/")
-def root():
-    return "Hello, World!"
+@app.get("/", response_class=HTMLResponse)
+def root_get(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+@app.post("/", response_class=HTMLResponse)
+def root_post(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-@app.get("/users/", response_model=list[UserId])
+@app.get("/users", response_model=list[UserId])
 def get_users(db: Session = Depends(get_db)):
     return crud.get_users(db)
 
@@ -31,14 +39,18 @@ def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
-@app.post("/users/", response_model=UserId)
-def create_user(user: UserData, db: Session = Depends(get_db)):
+@app.post("/users", response_class=RedirectResponse)
+def create_user(username: str = Form(...), email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+    user = UserData(username=username, email=email, password=password)
     db_user = crud.get_user_by_username(db, user.username)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
-    return crud.create_user(db, user)
+    crud.create_user(db, user)
+    return RedirectResponse(url="/")
+   
 
-@app.get("/users/validate", response_model=bool)
+
+@app.post("/users/validate", response_model=bool)
 def login(username: str, password:str, db: Session = Depends(get_db)):
     db_user = crud.validate_user(db, username, password)
     if db_user is None:
