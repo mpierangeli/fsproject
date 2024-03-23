@@ -37,3 +37,12 @@ def create_user(user: UserData, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
     return crud.create_user(db, user)
+
+@app.get("/users/validate", response_model=bool)
+def login(username: str, password:str, db: Session = Depends(get_db)):
+    db_user = crud.validate_user(db, username, password)
+    if db_user is None:
+        raise HTTPException(status_code=400, detail="Username or Password Incorrect")
+    return True
+
+        

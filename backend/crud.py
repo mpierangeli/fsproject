@@ -22,3 +22,11 @@ def create_user(db: Session, user: UserData):
     db.commit()
     db.flush(new_user)
     return new_user
+
+def validate_user(db: Session, username: str, password: str):
+    user = db.query(User).filter(User.username == username).first()
+    if user:
+        check_pass = hashlib.sha256((password).encode('utf-8')+user.salt).hexdigest()
+        if check_pass == user.password:
+            return user
+    return None
