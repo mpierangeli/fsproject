@@ -21,7 +21,7 @@ def create_user(db: Session, user: UserData):
     db.add(new_user)
     db.commit()
     db.flush(new_user)
-    return new_user
+    return True
 
 def validate_user(db: Session, username: str, password: str):
     user = db.query(User).filter(User.username == username).first()
