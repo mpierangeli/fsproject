@@ -47,14 +47,18 @@ def create_user(username: str = Form(...), email: str = Form(...), password: str
         raise HTTPException(status_code=400, detail="Username already registered")
     crud.create_user(db, user)
     return RedirectResponse(url="/")
-   
 
-
-@app.post("/users/validate", response_model=bool)
-def login(username: str, password:str, db: Session = Depends(get_db)):
+@app.post("/users/validate", response_model=str)
+def login(username: str = Form(...), password:str = Form(...), db: Session = Depends(get_db)):
     db_user = crud.validate_user(db, username, password)
     if db_user is None:
-        raise HTTPException(status_code=400, detail="Username or Password Incorrect")
-    return True
+        return "Username or Password Incorrect"
+    return "Login Successful"
 
-        
+@app.get("/toggleSignup")
+def toggleSignup(request: Request):
+    return templates.TemplateResponse("signup-form.html", {"request": request})
+
+@app.get("/toggleLogin")
+def toggleSignup(request: Request):
+    return templates.TemplateResponse("login-form.html", {"request": request})
