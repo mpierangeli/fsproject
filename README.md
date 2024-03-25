@@ -1,6 +1,8 @@
 # testing:
 
-- Fast API (Python)
-- MySQL db + SQLalchemy
-- Docker: containers, build (hub), network, compose
-- bash & Linux Mint.
+- Backend = FastAPI + SQLAlchemy (ORM)
+- DB = MySQL
+- Frontend = HTMX + CSS
+- Also learning: 
+    - Docker: containers, build (hub), network, compose
+    - bash & Linux Mint.
