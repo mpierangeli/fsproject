@@ -31,14 +31,6 @@ def root_post(request: Request):
 @app.get("/users", response_model=list[UserId])
 def get_users(db: Session = Depends(get_db)):
     return crud.get_users(db)
-
-@app.get("/users/{user_id:int}", response_model=UserId)
-def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_id(db, user_id)
-    if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return db_user
-
 @app.post("/users", response_class=RedirectResponse)
 def create_user(username: str = Form(...), email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
     user = UserData(username=username, email=email, password=password)
@@ -48,17 +40,16 @@ def create_user(username: str = Form(...), email: str = Form(...), password: str
     crud.create_user(db, user)
     return RedirectResponse(url="/")
 
-@app.post("/users/validate", response_model=str)
-def login(username: str = Form(...), password:str = Form(...), db: Session = Depends(get_db)):
+@app.post("/users/login")
+def login(request: Request, username: str = Form(...), password:str = Form(...), db: Session = Depends(get_db)):
     db_user = crud.validate_user(db, username, password)
     if db_user is None:
         return "Username or Password Incorrect"
-    return "Login Successful"
+    return templates.TemplateResponse("platform.html", {"request": request, "user":db_user})
 
 @app.get("/toggleSignup")
 def toggleSignup(request: Request):
     return templates.TemplateResponse("signup-form.html", {"request": request})
-
 @app.get("/toggleLogin")
 def toggleSignup(request: Request):
     return templates.TemplateResponse("login-form.html", {"request": request})

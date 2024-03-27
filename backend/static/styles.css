@@ -1,23 +1,29 @@
-body {
+body,html {
     background-color: #111; /* Dark background color */
-    color: #f0f; /* Light text color */
+    color: #fff; /* Light text color */
     font-family: Arial, sans-serif; /* Font stack */
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     margin: 100px auto;
-    text-align: left;
+    text-align: center;
 }
 
 .form-container {
-    background-color: #333; /* Darker background for the form container */
+    background-color: #222; /* Darker background for the form container */
     padding: 40px;
+    width: 30%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+    margin: 0 auto; /* Center the form container horizontally */
+    display: block; /* Ensure the form container behaves as a block element */
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -39,4 +45,61 @@ button {
 
 button:hover {
     background-color: #0056b3; /* Darker color on hover */
+}
+
+
+.top-bar {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout,
+.settings,
+.edit-publication,
+.delete-publication,
+.edit-comment,
+.delete-comment {
+    background-color: #555;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.middle-section {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.publication {
+    margin: 10px;
+    padding: 10px;
+    background-color: #222;
+    width:20%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+}
+
+.foot-bar {
+    background-color: #333;
+    color: #fff;
+    padding: 0px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }

@@ -1,12 +1,11 @@
 <div class="form-container" id="form-container">
     <div id="login-form">
-        <form hx-post="/users/validate" hx-target="#response" hx-swap="innerHTML">
+        <form hx-post="/users/login" hx-target="#container" hx-swap="outerHTML">
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <button type="submit" class="btn" hx-disable="true" hx-indicator="dots">Login</button>
         </form>
     </div>
-    <div id="response"></div>
     <div id="toggle-signup" hx-trigger="click" hx-get="/toggleSignup" hx-target="#form-container" hx-swap="outerHTML">
         <p>If you don't have an account yet</p>
         <button>Sign Up</button>

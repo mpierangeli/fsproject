@@ -1,0 +1,44 @@
+<div class="container" id="container">
+    <div class="top-bar">
+        <div class="left-section">
+            <h1>Testing Platform</h1>
+        </div>
+        <div class="right-section">
+            <h4>{{user.username}}</h4>
+            <button class="settings">Settings</button>
+            <button class="logout" hx-trigger="click" hx-get="/" hx-target="#container" hx-swap="outerHTML">Logout</button>
+        </div>
+    </div>
+    <div class="publication-menu">
+        <button class="add-publication">Add Publication</button>
+        <button class="search">Search</button>
+    </div>
+    <div class="middle-section">
+        <div class="publication">
+            <div class="publication-header">
+                <h3>Publication Title</h3>
+                <h4>Author Name</h4>
+                <button class="edit-publication">Edit</button>
+                <button class="delete-publication">Delete</button>
+            </div>
+            <div class="publication-body">
+                <p>Publication Body</p>
+            </div>
+            <div class="publication-comments">
+                <div class="comment">
+                    <div class="comment-header">
+                        <h4>Commenter Name</h4>
+                        <button class="edit-comment">Edit</button>
+                        <button class="delete-comment">Delete</button>
+                    </div>
+                    <div class="comment-body">
+                        <p>Comment Body</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="foot-bar">
+        <h3>Contact Info</h3>
+    </div>
+</div>
