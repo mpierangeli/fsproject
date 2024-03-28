@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>THE PLATFORM</title>
     <link rel="stylesheet" href="../static/styles.css">
 
     <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
 </head>
 <body>
     <div class="container" id="container">
-        <h1>Welcome, stranger</h1>
         <div class="form-container" id="form-container">
-           <div id="login-form-placeholder" hx-get="/toggleLogin" hx-trigger="load" hx-target="#form-container" hx-swap="outerHTML"></div>
+           <div id="login-form-placeholder" hx-get="/toggleLogin" hx-trigger="load" hx-target="#container"></div>
         </div>
     </div>
 </body>

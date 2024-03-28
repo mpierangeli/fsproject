@@ -1,15 +1,17 @@
-<div class="form-container" id="form-container">
-    <div id="signup-form">
-        <form hx-post="/users" hx-target="#response" hx-swap="innerHTML">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="email" name="email" placeholder="Email">
-            <button type="submit" class="btn" hx-disable="true" hx-indicator="dots">Sign Up</button>
-        </form>
-    </div>
-    <div id="response"></div>
-    <div id="toggle-login" hx-trigger="click" hx-get="/toggleLogin" hx-target="#form-container" hx-swap="outerHTML">
-        <p>If you already have an account</p>
-        <button>Login</button>
+<div class="container" id="container"></div>
+    <div class="form-container" id="form-container">
+        <div id="signup-form">
+            <form hx-post="/users" hx-target="#response" hx-swap="innerHTML">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="email" name="email" placeholder="Email">
+                <button type="submit" class="btn" hx-disable="true" hx-indicator="dots">Sign Up</button>
+            </form>
+        </div>
+        <div id="response"></div>
+        <div id="toggle-login" hx-trigger="click" hx-get="/toggleLogin" hx-target="#form-container" hx-swap="outerHTML">
+            <p>If you already have an account</p>
+            <button>Login</button>
+        </div>
     </div>
 </div>

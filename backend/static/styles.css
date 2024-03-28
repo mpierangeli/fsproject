@@ -34,7 +34,6 @@ input[type="email"] {
 }
 
 button {
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #007bff; /* Colorful button background */
@@ -71,26 +70,112 @@ button:hover {
 .delete-comment {
     background-color: #555;
     color: #fff;
-    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-
+.logout {
+    background-color: #d9534f;
+}
 .middle-section {
     margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     align-items: flex-start;
 }
-
+.right-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 5%;
+}
 .publication {
-    margin: 10px;
-    padding: 10px;
     background-color: #222;
-    width:20%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+}
+
+.publication-header {
+margin-bottom: 10px;
+width: 100%;
+display: flex;
+justify-content: space-between;
+}
+
+.publication-header h3 {
+font-size: 24px;
+margin: 0;
+}
+
+.publication-header h4 {
+font-size: 18px;
+color: #666;
+margin: 5px 0;
+}
+
+.publication-body {
+margin-bottom: 20px;
+width: 100%;
+}
+
+.publication-comments {
+border-top: 1px solid #ccc;
+padding-top: 20px;
+width: 100%;
+}
+
+.comment {
+margin-bottom: 15px;
+width: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.comment-header {
+width: 100%;
+display: flex;
+justify-content: space-between;
+}
+
+.comment-header h4 {
+font-size: 16px;
+margin: 0;
+}
+
+.comment-body p {
+margin: 0;
+}
+
+.edit-publication,
+.delete-publication,
+.edit-comment,
+.delete-comment {
+background-color: #ccc;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+}
+
+.edit-publication:hover,
+.delete-publication:hover,
+.edit-comment:hover,
+.delete-comment:hover {
+background-color: #bbb;
+}
+
+.button-container {
+display: flex;
+flex-direction: row;
+}
+
+.button-container button {
+margin-left: 5px;
 }
 
 .foot-bar {
