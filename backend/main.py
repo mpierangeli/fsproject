@@ -79,9 +79,23 @@ def platform(request: Request, access_token: Annotated[str | None, Cookie()] = N
             return RedirectResponse(url="/")
         return templates.TemplateResponse("platform.html", {"request": request, 
                                                             "user":user_data["user"], 
-                                                            "publications":[{"title":"Title 1", "content":"Content 1", "author":"Author 1", "date":"2021-10-01"},
-                                                                            {"title":"Title 2", "content":"Content 2", "author":"Author 2", "date":"2021-10-02"},
-                                                                            {"title":"Title 3", "content":"Content 3", "author":"Author 3", "date":"2021-10-03"}
+                                                            "publications":[{"title":"Title 1", 
+                                                                             "content":"Content 1", 
+                                                                             "author":"admin", 
+                                                                             "date":"2021-10-01", 
+                                                                             "comments":[{"content":"Comment 1", "author":"admin", "date":"2021-10-01"},
+                                                                                         {"content":"Comment 2", "author":"Author 2", "date":"2021-10-02"}]
+                                                                            },
+                                                                            {"title":"Title 2", 
+                                                                             "content":"Content 2", 
+                                                                             "author":"Author 2", 
+                                                                             "date":"2021-10-02", 
+                                                                             "comments":[]},
+                                                                            {"title":"Title 3", 
+                                                                             "content":"Content 3", 
+                                                                             "author":"Author 3", 
+                                                                             "date":"2021-10-03",
+                                                                             "comments":[]}
                                                             ]
                                                             })
     except JWTError:
@@ -98,7 +112,7 @@ def toggleSignup(request: Request, access_token: Annotated[str | None, Cookie()]
         user_data = jwt.decode(access_token, JWT_SECRET_KEY, algorithms=["HS256"])
         if crud.get_user_by_username(db, user_data["user"]) is None:
             return RedirectResponse(url="/")
-        return templates.TemplateResponse("platform.html", {"request": request, "user":user_data["user"], "token":access_token})
+        return RedirectResponse(url="/users/platform")
     except JWTError:
         return templates.TemplateResponse("login-form.html", {"request": request})
     

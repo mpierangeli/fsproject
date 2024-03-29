@@ -20,24 +20,37 @@
             <div class="publication-header">
                 <h3>{{p.title}}</h3>
                 <h4>{{p.author}}</h4>
+                <h5>{{p.date}}</h5>
+
+                {% if p.author == user %}
                 <button class="edit-publication">Edit</button>
                 <button class="delete-publication">Delete</button>
+                {% endif %}
+
             </div>
             <div class="publication-body">
                 <p>{{p.content}}</p>
             </div>
             <div class="publication-comments">
-                {}
+                {% for c in p.comments %}
+
                 <div class="comment">
                     <div class="comment-header">
-                        <h4>Commenter Name</h4>
+                        <h4>{{c.author}}</h4>
+                        <h5>{{c.date}}</h5>
+
+                        {% if c.author == user %}
                         <button class="edit-comment">Edit</button>
                         <button class="delete-comment">Delete</button>
+                        {% endif %}
+                        
                     </div>
                     <div class="comment-body">
-                        <p>Comment Body</p>
+                        <p>{{c.content}}</p>
                     </div>
                 </div>
+
+                {% endfor %}
             </div>
         </div>
 
